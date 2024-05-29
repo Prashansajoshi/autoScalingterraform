@@ -7,11 +7,10 @@
 #   associate_public_ip_address = true
 
 #   tags = {
-#     Name = "prashansa_terraform__public_1"
+#     Name = "prashansa_terraform_public_1"
 #     silo = "intern2"
 #     owner = "prashansa.joshi"
 #     terraform = "true"
 #     environment = "dev"
 #   }
 # }
-

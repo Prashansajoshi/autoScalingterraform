@@ -1,8 +1,8 @@
-resource "aws-vpc" "prashansa_vpc" {
-    cidr_block = var.cidr_block
+resource "aws_vpc" "prashansa_terraform_vpc" {
+    cidr_block = var.vpc_cidr
 
     tags = {
-        Name = "prashansa_vpc"
+        Name = "prashansa_terraform_vpc"
         owner = "prashansa.joshi"
         silo = "intern2"
         environment = "dev"
