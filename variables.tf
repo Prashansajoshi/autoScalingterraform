@@ -53,13 +53,13 @@ variable "availability_zone_2" {
 variable "desired_capacity" {
   description = "Desired number of instances in the Auto Scaling group"
   type        = number
-  default     = 2
+  default     = 1
 }
 
 variable "max_size" {
   description = "Maximum number of instances in the Auto Scaling group"
   type        = number
-  default     = 5
+  default     = 2
 }
 
 variable "min_size" {
@@ -67,3 +67,52 @@ variable "min_size" {
   type        = number
   default     = 1
 }
+
+variable "scale_up_adjustment" {
+  description = "Scaling adjustment for scaling up."
+  type        = number
+  default     = 1
+}
+
+variable "scale_down_adjustment" {
+  description = "Scaling adjustment for scaling down."
+  type        = number
+  default     = -1
+}
+
+variable "scale_up_threshold" {
+  description = "CPU utilization threshold for scaling up."
+  type        = number
+  default     = 30
+}
+
+variable "scale_down_threshold" {
+  description = "CPU utilization threshold for scaling down."
+  type        = number
+  default     = 5
+}
+
+variable "scale_up_evaluation_periods" {
+  description = "Evaluation periods for scaling up."
+  type        = number
+  default     = 2
+}
+
+variable "scale_down_evaluation_periods" {
+  description = "Evaluation periods for scaling down."
+  type        = number
+  default     = 2
+}
+
+variable "scale_up_cooldown" {
+  description = "Cooldown period for scaling up."
+  type        = number
+  default     = 300
+}
+
+variable "scale_down_cooldown" {
+  description = "Cooldown period for scaling down."
+  type        = number
+  default     = 300
+}
+

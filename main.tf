@@ -52,15 +52,24 @@ module "rt_association" {
 # }
 
 module "autoscaling" {
-  source            = "./modules/autoscaling"
-  ami               = var.ami
-  instance_type     = var.instance_type
-  key_name          = var.key_name
-  security_group_id = module.security_group.security_group_id
-  subnet_id         = module.subnet.public_subnet_1
-  desired_capacity  = var.desired_capacity
-  max_size          = var.max_size
-  min_size          = var.min_size
+  source                        = "./modules/autoscaling"
+  ami                           = var.ami
+  instance_type                 = var.instance_type
+  key_name                      = var.key_name
+  security_group_id             = module.security_group.security_group_id
+  subnet_id                     = module.subnet.public_subnet_1
+  desired_capacity              = var.desired_capacity
+  max_size                      = var.max_size
+  min_size                      = var.min_size
+  scale_up_adjustment           = var.scale_up_adjustment
+  scale_down_adjustment         = var.scale_down_adjustment
+  scale_up_threshold            = var.scale_up_threshold
+  scale_down_threshold          = var.scale_down_threshold
+  scale_up_evaluation_periods   = var.scale_up_evaluation_periods
+  scale_down_evaluation_periods = var.scale_down_evaluation_periods
+  scale_up_cooldown             = var.scale_up_cooldown
+  scale_down_cooldown           = var.scale_down_cooldown
+  alb_target_group_arn          = module.alb.alb_target_group_arn
 }
 
 module "alb" {
