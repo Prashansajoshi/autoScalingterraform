@@ -5,7 +5,14 @@ resource "aws_launch_template" "prashansa_autoScaling_template" {
   key_name      = var.key_name
   user_data     = filebase64("${path.module}/../../ec2_init.sh")
   #   security_group_names = [var.security_group_id]
-  
+
+
+  metadata_options {
+    http_endpoint               = "enabled"  #enables the instance metadata service on the EC2 instance.
+    http_tokens                 = "required" #all requests to the instance metadata service be made with a valid session token. 
+    http_put_response_hop_limit = 1          #By limiting this to 1, you're ensuring that the response doesn't get routed through multiple other systems, which can be a security risk.
+    instance_metadata_tags      = "enabled"
+  }
 
   network_interfaces {
     associate_public_ip_address = true
@@ -15,6 +22,18 @@ resource "aws_launch_template" "prashansa_autoScaling_template" {
 
   lifecycle {
     create_before_destroy = true
+  }
+
+  tag_specifications {
+    resource_type = "instance"
+
+    tags = {
+      Name        = "prashansa_aws_lauch_template_1"
+      silo        = "intern2"
+      owner       = "prashansa.joshi"
+      terraform   = "true"
+      environment = "dev"
+    }
   }
 }
 
@@ -28,7 +47,7 @@ resource "aws_autoscaling_group" "prashansa_autoScaling_group" {
     id      = aws_launch_template.prashansa_autoScaling_template.id
     version = "$Latest"
   }
-  health_check_type         = "EC2" 
+  health_check_type         = "EC2"
   health_check_grace_period = 300
   wait_for_capacity_timeout = "0"
 
